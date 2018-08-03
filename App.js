@@ -1,11 +1,18 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { styles } from './AppStyles';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './src/reducers';
+import Todo from './src/components/Todo';
+
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 const App = () => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>Welcome to React Native!</Text>
-  </View>
+  <Provider store={store}>
+    <Todo />
+  </Provider>
 );
 
 export default App;
