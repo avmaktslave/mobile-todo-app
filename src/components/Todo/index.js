@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { styles } from './AppStyles';
+import { StyledText, StyledView } from './AppStyles';
+import TodoForm from '../TodoForm';
+import TodoList from '../TodoList';
 
 const Todo = () => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>Welcome to React Native!</Text>
-  </View>
+  <StyledView>
+    <StyledText>ToDo</StyledText>
+    <TodoForm />
+    <TodoList />
+  </StyledView>
 );
 
 export default Todo;

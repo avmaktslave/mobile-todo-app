@@ -1,11 +1,20 @@
-import uid from 'uid';
 import * as type from '../constants';
 
+let id = 1;
 export const createTodo = text => ({
   type: type.createTodoItem,
   payload: {
-    id: uid(),
+    id: id++,
     text,
+    completed: false,
+  },
+});
+
+export const toggleTodo = (id, completed) => ({
+  type: type.toggleTodoItem,
+  payload: {
+    id,
+    completed,
   },
 });
 
@@ -14,6 +23,7 @@ export const editTodo = (id, text) => ({
   payload: {
     id,
     text,
+    completed: false,
   },
 });
 
