@@ -33,7 +33,7 @@ class TodoForm extends React.Component {
             borderBottomColor: '#6889f0',
             width: 300,
             marginBottom: 10,
-            fontSize: 20,
+            fontSize: 25,
           }}
           onChangeText={this.changeHandler}
         />

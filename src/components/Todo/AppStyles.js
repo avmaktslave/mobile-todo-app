@@ -9,7 +9,9 @@ export const StyledView = styled.View`
 
 export const StyledText = styled.Text`
   font-size: 50px;
-  color: #69b9f0;
+  color: #fff;
+  background-color: #69b9f0;
+  width: 100%;
   font-weight: bold;
   font-style: italic;
   text-align: center;
