@@ -1,13 +1,15 @@
 import React from 'react';
-import { TextInput } from 'react-native';
 import { connect } from 'react-redux';
+import { reduxForm, Field } from 'redux-form';
 import { func } from 'prop-types';
 import { createTodo } from '../../actions/todoAction';
+import { Input } from './Input';
 import Button from '../Button';
 
 class TodoForm extends React.Component {
   static propTypes = {
     createTodo: func.isRequired,
+    reset: func.isRequired,
   };
 
   state = {
@@ -18,23 +20,18 @@ class TodoForm extends React.Component {
 
   AddTodo = () => {
     const { text } = this.state;
-    const { createTodo } = this.props;
+    const { createTodo, reset } = this.props;
     if (!text) return;
     createTodo(text);
-    this.setState({ text: '' });
+    reset('todo');
   };
 
   render() {
     return (
       <React.Fragment>
-        <TextInput
-          style={{
-            borderBottomWidth: 3,
-            borderBottomColor: '#6889f0',
-            width: 300,
-            marginBottom: 10,
-            fontSize: 25,
-          }}
+        <Field
+          name="todo"
+          component={Input}
           onChangeText={this.changeHandler}
         />
         <Button name="Add Todo" onPress={this.AddTodo} />
@@ -50,4 +47,4 @@ const mapDispatchToProps = {
 export default connect(
   null,
   mapDispatchToProps,
-)(TodoForm);
+)(reduxForm({ form: 'todo' })(TodoForm));

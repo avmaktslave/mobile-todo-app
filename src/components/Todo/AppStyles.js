@@ -5,6 +5,7 @@ export const StyledView = styled.View`
   justify-content: center;
   align-items: center;
   background-color: #fafbff;
+  min-height: 75%;
 `;
 
 export const StyledText = styled.Text`
@@ -15,4 +16,11 @@ export const StyledText = styled.Text`
   font-weight: bold;
   font-style: italic;
   text-align: center;
+`;
+
+export const Footer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafbff;
 `;

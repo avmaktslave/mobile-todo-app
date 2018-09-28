@@ -1,45 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  TextInput,
-} from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Button from 'react-native-button';
 import { func, string, number, bool } from 'prop-types';
 import { deleteTodo, editTodo, toggleTodo } from '../../actions/todoAction';
-
-const styles = StyleSheet.create({
-  button: {
-    borderRadius: 6,
-    borderWidth: 3,
-    borderColor: '#69b9f0',
-    fontSize: 25,
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    paddingRight: 10,
-    paddingLeft: 10,
-    margin: 5,
-  },
-  text: {},
-  editText: {
-    minHeight: 100,
-    minWidth: 300,
-    fontSize: 26,
-    fontWeight: 'bold',
-    borderRadius: 10,
-    margin: 5,
-    padding: 10,
-    backgroundColor: 'ivory',
-    textAlign: 'center',
-    textAlignVertical: 'center',
-  },
-  activeTitle: {
-    color: 'red',
-  },
-});
+import {
+  TodoText,
+  Wrap,
+  EditText,
+  EditWrap,
+  ButtonWrap,
+} from './todoItemStyles';
+import EditButton from '../EditButton';
 
 class TodoItem extends React.Component {
   static propTypes = {
@@ -53,9 +25,8 @@ class TodoItem extends React.Component {
 
   constructor(props) {
     super(props);
-    const { text } = this.props;
     this.state = {
-      editingText: text,
+      editingText: props.text,
       isShown: false,
     };
   }
@@ -80,58 +51,23 @@ class TodoItem extends React.Component {
     return (
       <React.Fragment>
         <TouchableOpacity onPress={() => toggleTodo(id, completed)}>
-          <View>
-            <Text
-              style={{
-                fontSize: 26,
-                fontWeight: 'bold',
-                borderRadius: 10,
-                margin: 5,
-                padding: 10,
-                backgroundColor: !completed ? 'aliceblue' : 'aquamarine',
-                textAlign: 'center',
-                textAlignVertical: 'center',
-                textDecorationLine: completed ? 'line-through' : 'none',
-              }}
-            >
-              {text}
-            </Text>
-          </View>
+          <Wrap>
+            <TodoText done={completed}>{text}</TodoText>
+          </Wrap>
         </TouchableOpacity>
         {isShown && (
-          <View style={{ flex: 1, alignItems: 'center' }}>
-            <TextInput
-              style={styles.editText}
+          <EditWrap>
+            <EditText
               onChangeText={this.editHandler}
               defaultValue={editingText}
             />
-            <Button
-              style={styles.button}
-              styleDisabled={{ color: 'red' }}
-              onPress={this.saveEditedText}
-            >
-              Save
-            </Button>
-          </View>
+            <EditButton text="Save" onPress={this.saveEditedText} />
+          </EditWrap>
         )}
-        <View
-          style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}
-        >
-          <Button
-            style={styles.button}
-            styleDisabled={{ color: 'red' }}
-            onPress={this.onEdit}
-          >
-            Edit
-          </Button>
-          <Button
-            style={styles.button}
-            styleDisabled={{ color: 'red' }}
-            onPress={() => deleteTodo(id)}
-          >
-            Delete
-          </Button>
-        </View>
+        <ButtonWrap>
+          <EditButton text="Edit" onPress={this.onEdit} />
+          <EditButton text="Delete" onPress={() => deleteTodo(id)} />
+        </ButtonWrap>
       </React.Fragment>
     );
   }

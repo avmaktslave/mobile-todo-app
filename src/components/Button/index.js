@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, func } from 'prop-types';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 
@@ -13,13 +14,24 @@ const StyledText = styled.Text`
   color: #fff;
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
   text-align: center;
 `;
 
-const Button = props => (
-  <TouchableOpacity onPress={props.onPress}>
-    <StyledText>{props.name}</StyledText>
+const Button = ({ name, onPress }) => (
+  <TouchableOpacity onPress={onPress}>
+    <StyledText>{name}</StyledText>
   </TouchableOpacity>
 );
+
+Button.propTypes = {
+  name: string.isRequired,
+  onPress: func,
+};
+
+Button.defaultProps = {
+  onPress: () => {},
+};
 
 export default Button;
